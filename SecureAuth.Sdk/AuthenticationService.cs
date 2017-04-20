@@ -127,6 +127,28 @@ namespace SecureAuth.Sdk
             // process request
             return Validate(request);
         }
+
+        /// <summary>
+        /// Validate the user entered OTP agains the OTP sent using the SendOTP API.
+        /// Requires configuration to enable OTP saving to user profile in IdP.
+        /// </summary>
+        /// <param name="request">ValidateOtpRequest</param>
+        /// <returns>BaseResponse</returns>
+        public BaseResponse ValidateOtp(ValidateOtpRequest request)
+        {
+            // sanitize request
+            if (string.IsNullOrEmpty(request.UserId))
+            {
+                throw new ArgumentNullException("ValidateOtpRequest.UserId", "User ID cannot be empty.");
+            }
+            if (string.IsNullOrEmpty(request.Otp))
+            {
+                throw new ArgumentNullException("ValidateOtpRequest.Otp", "OTP cannot be empty.");
+            }
+
+            //process request
+            return this._apiClient.Post<BaseResponse>("/api/v1/validateotp", request);
+        }
         #endregion
 
         #region Send OTP Methods

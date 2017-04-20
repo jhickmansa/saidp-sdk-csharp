@@ -30,9 +30,19 @@ namespace SecureAuth.Sdk.UnitTests
             string apiId = ConfigurationManager.AppSettings["ApiID"];
             string apiKey = ConfigurationManager.AppSettings["ApiKey"];
 
+            if (string.IsNullOrWhiteSpace(secureAuthRealm))
+            {
+                var mockResponseHandler = new MockResponseHandler();
+            }
             // Init the SecureAuthService
             Configuration config = new Configuration(secureAuthRealm, apiId, apiKey);
             secAuthSvc = new SecureAuthService(config);
+        }
+        private void RegisterMockHandler()
+        {
+            var mockResponseHandler = new MockResponseHandler();
+
+
         }
 
         [TestMethod]
