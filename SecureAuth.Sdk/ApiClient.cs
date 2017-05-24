@@ -8,30 +8,31 @@ namespace SecureAuth.Sdk
     {
         #region Private Members
         private Configuration Configuration { get; set; }
+        private HttpClient ApiHttpClient { get; set; }
         #endregion
 
         #region Properties
-        internal string AppId
+        private string AppId
         {
             get { return this.Configuration.AppId; }
         }
 
-        internal string AppKey
+        private string AppKey
         {
             get { return this.Configuration.AppKey; }
         }
 
-        internal string SecureAuthRealmUrl
+        private string SecureAuthRealmUrl
         {
             get { return this.Configuration.SecureAuthRealmUrl; }
         }
-
         #endregion
 
         #region Constructors
         internal ApiClient(Configuration configuration)
         {
             this.Configuration = configuration;
+            this.ApiHttpClient = new HttpClient(new HmacSigningHandler(this.AppId, this.AppKey));
 
             if (configuration.BypassCertValidation)
             {
@@ -45,14 +46,14 @@ namespace SecureAuth.Sdk
         #endregion
 
         #region Methods
-        internal T Get<T>(string apiEndpoint) where T : BaseResponse
+        public T Get<T>(string apiEndpoint) where T : BaseResponse
         {
             string rawResult = string.Empty;
             HttpStatusCode statusCode;
             string requestUrl = string.Concat(this.SecureAuthRealmUrl, apiEndpoint);
 
             // Process HTTP request
-            using (HttpClient client = new HttpClient(new HmacSigningHandler(this.AppId, this.AppKey)))
+            using (HttpClient client = ApiHttpClient)
             {
                 var response = client.GetAsync(requestUrl).Result;
                 statusCode = response.StatusCode;
@@ -68,16 +69,16 @@ namespace SecureAuth.Sdk
             return result;
         }
 
-        internal T Post<T>(string apiEndpoint, BaseRequest request = null) 
+        public T Post<T>(string apiEndpoint, BaseRequest request = null) 
             where T : BaseResponse
         {
             string rawResult = string.Empty;
             string rawRequest = string.Empty;
             HttpStatusCode statusCode;
             string requestUrl = string.Concat(this.SecureAuthRealmUrl, apiEndpoint);
-            
+
             // Process HTTP request
-            using (HttpClient client = new HttpClient(new HmacSigningHandler(this.AppId, this.AppKey)))
+            using (HttpClient client = ApiHttpClient)
             {
                 if (request != null)
                 {
@@ -100,7 +101,7 @@ namespace SecureAuth.Sdk
             return result;
         }
 
-        internal T Put<T>(string apiEndpoint, BaseRequest request = null)
+        public T Put<T>(string apiEndpoint, BaseRequest request = null)
             where T : BaseResponse
         {
             string rawResult = string.Empty;
@@ -108,8 +109,7 @@ namespace SecureAuth.Sdk
             HttpStatusCode statusCode;
             string requestUrl = string.Concat(this.SecureAuthRealmUrl, apiEndpoint);
 
-            // Process HTTP request
-            using (HttpClient client = new HttpClient(new HmacSigningHandler(this.AppId, this.AppKey)))
+            using (HttpClient client = ApiHttpClient)
             {
                 if (request != null)
                 {

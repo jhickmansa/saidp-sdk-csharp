@@ -58,6 +58,7 @@
     <Compile Include="HmacSigningHandler.cs" />
     <Compile Include="IAccessHistoryService.cs" />
     <Compile Include="IAdaptiveAuthService.cs" />
+    <Compile Include="IApiClient.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="IDeviceFingerprintService.cs" />
     <Compile Include="IGroupService.cs" />
