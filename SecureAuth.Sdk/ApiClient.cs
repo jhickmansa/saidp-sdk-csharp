@@ -4,25 +4,25 @@ using System.Text;
 
 namespace SecureAuth.Sdk
 {
-    public class ApiClient
+    public class ApiClient : IApiClient
     {
         #region Private Members
-        private Configuration Configuration { get; set; }
-        private HttpClient ApiHttpClient { get; set; }
+        public Configuration Configuration { get; set; }
+        public  HttpClient ApiHttpClient { get; set; }
         #endregion
 
         #region Properties
-        private string AppId
+        public string AppId
         {
             get { return this.Configuration.AppId; }
         }
 
-        private string AppKey
+        public string AppKey
         {
             get { return this.Configuration.AppKey; }
         }
 
-        private string SecureAuthRealmUrl
+        public string SecureAuthRealmUrl
         {
             get { return this.Configuration.SecureAuthRealmUrl; }
         }
