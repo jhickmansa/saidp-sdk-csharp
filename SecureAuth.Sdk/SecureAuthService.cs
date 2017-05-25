@@ -5,6 +5,7 @@ namespace SecureAuth.Sdk
     {
         #region Public Properties
         public Configuration Configuration { get; set; }
+        public IApiClient ApiClient { get; set; }
         
         /// <summary>
         /// Get or set the Configuration Application ID.
@@ -42,7 +43,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new UserService(new ApiClient(this.Configuration));
+                return new UserService(ApiClient);
             }
         }
 
@@ -55,7 +56,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new AuthenticationService(new ApiClient(this.Configuration));
+                return new AuthenticationService(ApiClient);
             }
         }
 
@@ -68,7 +69,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new NumberProfileService(new ApiClient(this.Configuration));
+                return new NumberProfileService(ApiClient);
             }
         }
         
@@ -81,7 +82,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new IpEvaluationService(new ApiClient(this.Configuration));
+                return new IpEvaluationService(ApiClient);
             }
         }
 
@@ -94,7 +95,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new DeviceFingerprintService(new ApiClient(this.Configuration));
+                return new DeviceFingerprintService(ApiClient);
             }
         }
 
@@ -107,7 +108,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new AccessHistoryService(new ApiClient(this.Configuration));
+                return new AccessHistoryService(ApiClient);
             }
         }
 
@@ -120,7 +121,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new AdaptiveAuthService(new ApiClient(this.Configuration));
+                return new AdaptiveAuthService(ApiClient);
             }
         }
 
@@ -133,7 +134,7 @@ namespace SecureAuth.Sdk
         {
             get
             {
-                return new GroupService(new ApiClient(this.Configuration));
+                return new GroupService(ApiClient);
             }
         }
         #endregion
@@ -142,17 +143,27 @@ namespace SecureAuth.Sdk
         public SecureAuthService()
         {
             this.Configuration = new Configuration();
+            this.ApiClient = new ApiClient(this.Configuration);
         }
 
         public SecureAuthService(Configuration configuration)
         {
             this.Configuration = configuration;
+            this.ApiClient = new ApiClient(this.Configuration);
         }
 
         public SecureAuthService(string secureAuthRealmUrl, string appId, string appKey)
         {
             this.Configuration = new Configuration(secureAuthRealmUrl, appId, appKey);
+            this.ApiClient = new ApiClient(this.Configuration);
         }
+
+        public SecureAuthService(Configuration configuration, IApiClient apiClient)
+        {
+            this.Configuration = configuration;
+            this.ApiClient = apiClient;
+        }
+
         #endregion
     }
 }

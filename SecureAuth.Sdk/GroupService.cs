@@ -4,9 +4,9 @@ namespace SecureAuth.Sdk
 {
     public class GroupService : IGroupService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal GroupService(ApiClient apiClient)
+        protected internal GroupService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }

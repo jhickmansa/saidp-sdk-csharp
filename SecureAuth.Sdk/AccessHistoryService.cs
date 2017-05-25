@@ -4,9 +4,9 @@ namespace SecureAuth.Sdk
 {
     public class AccessHistoryService : IAccessHistoryService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal AccessHistoryService(ApiClient apiClient)
+        protected internal AccessHistoryService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }

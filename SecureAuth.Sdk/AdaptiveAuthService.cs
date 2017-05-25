@@ -4,9 +4,9 @@ namespace SecureAuth.Sdk
 {
     public class AdaptiveAuthService : IAdaptiveAuthService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal AdaptiveAuthService(ApiClient apiClient)
+        protected internal AdaptiveAuthService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }

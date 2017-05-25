@@ -5,9 +5,9 @@ namespace SecureAuth.Sdk
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal AuthenticationService(ApiClient apiClient)
+        protected internal AuthenticationService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }

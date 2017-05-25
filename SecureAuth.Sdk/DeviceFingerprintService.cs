@@ -5,9 +5,9 @@ namespace SecureAuth.Sdk
 {
     public class DeviceFingerprintService : IDeviceFingerprintService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal DeviceFingerprintService(ApiClient apiClient)
+        protected internal DeviceFingerprintService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }

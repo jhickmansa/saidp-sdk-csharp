@@ -4,9 +4,9 @@ namespace SecureAuth.Sdk
 {
     public class IpEvaluationService : IIpEvaluationService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal IpEvaluationService(ApiClient apiClient)
+        protected internal IpEvaluationService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }

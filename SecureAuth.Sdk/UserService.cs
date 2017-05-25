@@ -4,9 +4,9 @@ namespace SecureAuth.Sdk
 {
     public class UserService : IUserService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal UserService(ApiClient apiClient)
+        protected internal UserService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }

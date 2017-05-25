@@ -5,9 +5,9 @@ namespace SecureAuth.Sdk
 {
     public class NumberProfileService : INumberProfileService
     {
-        private readonly ApiClient _apiClient;
+        private readonly IApiClient _apiClient;
 
-        protected internal NumberProfileService(ApiClient apiClient)
+        protected internal NumberProfileService(IApiClient apiClient)
         {
             this._apiClient = apiClient;
         }
